@@ -101,6 +101,7 @@ items:
     name: istiodemofrontend
   spec:
     ports:
+    - name: 8088-tcp
       port: 8088
       protocol: TCP
       targetPort: 8088
@@ -110,6 +111,22 @@ items:
     type: ClusterIP
   status:
     loadBalancer: {}
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: istiodemofrontend
+    name: istiodemo
+  spec:
+    port:
+      targetPort: 8088-tcp
+    to:
+      kind: Service
+      name: istiodemofrontend
+      weight: 100
+    wildcardPolicy: None
+  status:
+    ingress: null
 - apiVersion: v1
   kind: ImageStream
   metadata:
@@ -240,7 +257,7 @@ items:
     name: istiodemopopulator
   spec:
     ports:
-      name: http
+    - name: http-8088
       port: 8088
       protocol: TCP
       targetPort: 8088
@@ -274,7 +291,7 @@ items:
         type: Source
   status:
     dockerImageRepository: docker-registry.default.svc:5000/mongodb-32-centos7
-# DeploymentConfig mongo
+# DeploymentConfig mongn
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
@@ -347,25 +364,6 @@ items:
           name: mongodb-32-centos7:latest
       type: ImageChange
     - type: ConfigChange
-# Mongo Service
-- apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app: mongodb-32-centos7
-    name: mongodb-32-centos7
-  spec:
-    ports:
-    - name: mongo
-      port: 27017
-      protocol: TCP
-      targetPort: 27017
-    selector:
-      deploymentconfig: mongodb-32-centos7
-    sessionAffinity: None
-    type: ClusterIP
-  status:
-    loadBalancer: {}
 # Frontend route
 - apiVersion: v1
   kind: Route
@@ -375,7 +373,7 @@ items:
     name: istiodemo
   spec:
     port:
-      targetPort: http-8088
+      targetPort: 8088-tcp
     to:
       kind: Service
       name: istiodemofrontend
