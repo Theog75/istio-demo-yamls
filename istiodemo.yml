@@ -227,6 +227,7 @@ items:
 # Populator Imagestream
 - apiVersion: v1
   kind: ImageStream
+  metadata:
     labels:
       app: istiodemopopulator
     name: istiodemopopulator
