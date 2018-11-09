@@ -65,8 +65,8 @@ items:
           imagePullPolicy: Always
           name: istiodemofrontend
           ports:
-          - name: http-8088
           - containerPort: 8088
+            name: http-8088
             protocol: TCP
           resources: {}
           terminationMessagePath: /dev/termination-log
@@ -197,7 +197,6 @@ items:
           imagePullPolicy: Always
           name: istiodemopopulator
           ports:
-          - name: http-8088
           - containerPort: 8088
             protocol: TCP
           resources: {}
@@ -339,7 +338,6 @@ items:
           imagePullPolicy: Always
           name: mongodb-32-centos7
           ports:
-          - name: mongo-27017
           - containerPort: 27017
             protocol: TCP
           resources: {}
