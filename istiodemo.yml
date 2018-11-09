@@ -185,7 +185,7 @@ items:
         containers:
         - env:
           - name: MONGO_URL
-            value: mongodb-32-centos7.istio-demo.svc:27017
+            value: mongodb-32-centos7:27017
           - name: MONGO_DATABASE
             value: imdb
           - name: MONGO_USER
@@ -291,14 +291,13 @@ items:
         type: Source
   status:
     dockerImageRepository: docker-registry.default.svc:5000/mongodb-32-centos7
-# DeploymentConfig mongn
+# DeploymentConfig mongo
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
     labels:
       app: mongodb-32-centos7
     name: mongodb-32-centos7
-    selfLink: /apis/apps.openshift.io/v1/namespaces/istio-demo/deploymentconfigs/mongodb-32-centos7
   spec:
     replicas: 1
     revisionHistoryLimit: 10
