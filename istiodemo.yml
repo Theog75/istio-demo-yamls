@@ -102,7 +102,6 @@ items:
     name: istiodemofrontend
   spec:
     ports:
-    - name: http-8088
       port: 8088
       protocol: TCP
       targetPort: 8088
