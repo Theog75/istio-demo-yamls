@@ -197,7 +197,7 @@ items:
           imagePullPolicy: Always
           name: istiodemopopulator
           ports:
-          -name: http-8088
+          - name: http-8088
           - containerPort: 8088
             protocol: TCP
           resources: {}
