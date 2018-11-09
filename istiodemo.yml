@@ -240,7 +240,7 @@ items:
     name: istiodemopopulator
   spec:
     ports:
-    - name: http-8088
+      name: http
       port: 8088
       protocol: TCP
       targetPort: 8088
